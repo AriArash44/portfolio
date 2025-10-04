@@ -17,7 +17,7 @@ export default function App() {
       <div className="flex flex-col-reverse justify-center items-center sm:flex-row sm:gap-6
       absolute top-16 sm:top-[50px] w-full sm:w-auto px-12 pointer-events-none">
         <img className="w-20 h-20 mt-4 sm:mt-0 rounded-full" style={{boxShadow: "0 0 20px rgba(0,0,0,0.4)"}}
-          src="/images/profile.svg" alt="Arash Asghari" />
+          src={`${import.meta.env.BASE_URL}images/profile.svg`} alt="Arash Asghari" />
         <h1 className="font-bold text-custom-gold" style={{fontFamily: 'caveat'}}>&nbsp;
           <Typewriter
             words={["Arash Asghari"]}

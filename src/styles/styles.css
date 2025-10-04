@@ -26,3 +26,12 @@
   font-style: normal;
   font-display: swap;
 }
+body.loading #root {
+  visibility: hidden;
+}
+
+body.loaded #root {
+  visibility: visible;
+}
+
+/*# sourceMappingURL=styles.css.map */
