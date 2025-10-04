@@ -23,8 +23,6 @@ export default function PizzaBackground({
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const debounceRef = useRef<number | null>(null);
   const [cols, setCols] = useState(0);
-
-  // Recalculate cols on resize
   useEffect(() => {
     const resize = () => {
       if (!containerRef.current) return;
@@ -35,15 +33,12 @@ export default function PizzaBackground({
     window.addEventListener("resize", resize);
     return () => window.removeEventListener("resize", resize);
   }, [tileSize]);
-
-  // Build grid
-  const grid: { r: number; c: number; x: number; y: number; i: number }[] = [];
+  const grid: { r: number; c: number; x: number; y: number; i: number, rotation: number }[] = [];
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
-      grid.push({ r, c, x: c * tileSize, y: r * tileSize, i: r * cols + c });
+      grid.push({ r, c, x: c * tileSize, y: r * tileSize, i: r * cols + c, rotation: Math.random() * 360 });
     }
   }
-
   const updateActiveDebounced = (x: number, y: number) => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = window.setTimeout(() => {
@@ -53,7 +48,6 @@ export default function PizzaBackground({
       setActiveIndex(idx);
     }, debounceMs);
   };
-
   const handleMove = (e: React.MouseEvent) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -65,21 +59,18 @@ export default function PizzaBackground({
       updateActiveDebounced(x, y);
     });
   };
-
   useEffect(() => {
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       if (debounceRef.current) clearTimeout(debounceRef.current);
     };
   }, []);
-
   const cssVars: React.CSSProperties & Record<string, string | number> = {
     "--x": `${cursor.x}px`,
     "--y": `${cursor.y}px`,
     "--r": `${radius}px`,
     "--scale": zoomScale,
   };
-
   return (
     <div
       ref={containerRef}
@@ -110,24 +101,22 @@ export default function PizzaBackground({
         className="absolute inset-0 pointer-events-none will-change-transform"
         style={{
           transformOrigin: "var(--x) var(--y)",
-          transform: "scale(var(--scale))",
           clipPath: "circle(var(--r) at var(--x) var(--y))",
         }}
       />
       <div
-        className="absolute rounded-full border border-white/35 pointer-events-none"
+        className="absolute rounded-full pointer-events-none"
         style={{
           left: "calc(var(--x) - var(--r))",
           top: "calc(var(--y) - var(--r))",
           width: "calc(var(--r) * 2)",
           height: "calc(var(--r) * 2)",
-          boxShadow: "0 0 20px rgba(0,0,0,0.25) inset",
+          boxShadow: "0 0 20px rgba(0,0,0,0.35)",
         }}
       />
     </div>
   );
 }
-
 function GridLayer({
   grid,
   tileSize,
@@ -137,7 +126,7 @@ function GridLayer({
   className,
   style,
 }: {
-  grid: { r: number; c: number; x: number; y: number; i: number }[];
+  grid: { r: number; c: number; x: number; y: number; i: number; rotation: number }[];
   tileSize: number;
   icon: React.ReactNode;
   activeIndex: number | null;
@@ -158,7 +147,7 @@ function GridLayer({
               top: cell.y,
               width: tileSize,
               height: tileSize,
-              transform: `scale(${scale})`,
+              transform: `scale(${scale}) rotate(${cell.rotation}deg)`,
               transition: isActive
                 ? "transform 140ms ease, filter 140ms ease"
                 : undefined,
@@ -167,7 +156,7 @@ function GridLayer({
                 : undefined,
             }}
           >
-            <div style={{ width: tileSize * 0.6, height: tileSize * 0.6 }}>
+            <div style={{ width: tileSize * 0.8, height: tileSize * 0.8 }}>
               {icon}
             </div>
           </div>
