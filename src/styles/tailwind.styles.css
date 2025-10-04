@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+    --color-custom-gold: hsl(50, 100%, 35%);
+}
+
+@layer base {
+    h1 {
+        font-size: var(--text-3xl);
+    }
+    @media (min-width: 640px) {
+        h1 {
+            font-size: var(--text-5xl);
+        }
+    }
+}

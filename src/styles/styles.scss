@@ -1,0 +1,26 @@
+$font_weights: (400, 500, 600, 700);
+
+@each $space in $font_weights {
+    @font-face {
+        font-family: 'caveat';
+        src: url("/fonts/Caveat/Caveat-#{$space}.ttf") format("truetype");
+        font-weight: #{$space};
+        font-style: normal;
+        font-display: swap;
+    }
+}
+
+.handwrite {
+  font-family: 'Caveat', cursive;
+  font-size: 3rem;
+  background: linear-gradient(to right, black 50%, transparent 50%) no-repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  animation: reveal 3s steps(30, end) forwards;
+}
+
+@keyframes reveal {
+  from { background-position: 100% 0; }
+  to   { background-position: 0 0; }
+}

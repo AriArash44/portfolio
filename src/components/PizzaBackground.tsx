@@ -23,6 +23,7 @@ export default function PizzaBackground({
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const debounceRef = useRef<number | null>(null);
   const [cols, setCols] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
   useEffect(() => {
     const resize = () => {
       if (!containerRef.current) return;
@@ -75,6 +76,8 @@ export default function PizzaBackground({
     <div
       ref={containerRef}
       onMouseMove={handleMove}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
       style={{ height: rows * tileSize, ...cssVars }}
       className="relative w-full overflow-hidden cursor-none"
     >
@@ -85,35 +88,39 @@ export default function PizzaBackground({
         activeIndex={activeIndex}
         scale={1}
         className="absolute inset-0"
-        style={{
+        style={isHovering ? {
           WebkitMaskImage: "radial-gradient(circle var(--r) at var(--x) var(--y), transparent 99%, black 100%)",
           WebkitMaskComposite: "destination-out",
           maskImage: "radial-gradient(circle var(--r) at var(--x) var(--y), transparent 99%, black 100%)",
           maskComposite: "exclude",
-        }}
+        } : {}}
       />
-      <GridLayer
-        grid={grid}
-        tileSize={tileSize}
-        icon={icon}
-        activeIndex={activeIndex}
-        scale={zoomScale}
-        className="absolute inset-0 pointer-events-none will-change-transform"
-        style={{
-          transformOrigin: "var(--x) var(--y)",
-          clipPath: "circle(var(--r) at var(--x) var(--y))",
-        }}
-      />
-      <div
-        className="absolute rounded-full pointer-events-none"
-        style={{
-          left: "calc(var(--x) - var(--r))",
-          top: "calc(var(--y) - var(--r))",
-          width: "calc(var(--r) * 2)",
-          height: "calc(var(--r) * 2)",
-          boxShadow: "0 0 20px rgba(0,0,0,0.35)",
-        }}
-      />
+      {isHovering && (
+        <>
+          <GridLayer
+            grid={grid}
+            tileSize={tileSize}
+            icon={icon}
+            activeIndex={activeIndex}
+            scale={zoomScale}
+            className="absolute inset-0 pointer-events-none will-change-transform"
+            style={{
+              transformOrigin: "var(--x) var(--y)",
+              clipPath: "circle(var(--r) at var(--x) var(--y))",
+            }}
+          />
+          <div
+            className="absolute rounded-full pointer-events-none"
+            style={{
+              left: "calc(var(--x) - var(--r))",
+              top: "calc(var(--y) - var(--r))",
+              width: "calc(var(--r) * 2)",
+              height: "calc(var(--r) * 2)",
+              boxShadow: "0 0 20px rgba(0,0,0,0.35)",
+            }}
+          />
+        </>
+      )}
     </div>
   );
 }
