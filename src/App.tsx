@@ -35,8 +35,11 @@ export default function App() {
             />
           </h1>
         </div>
+        <div className="absolute top-10 right-0 rotate-90 sm:top-6 sm:right-7 sm:rotate-0">
+          <ToggleTheme />
+        </div>
       </header>
-      <main><ToggleTheme /></main>
+      <main></main>
       <footer></footer>
     </>
   );
