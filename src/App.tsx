@@ -4,9 +4,12 @@ import ToggleTheme from "./components/ToggleTheme";
 import PizzaIcon from "/icons/pizza.svg";
 import WhitePizzaIcon from "/icons/w_pizza.svg";
 import { useTheme } from "./contexts/themeContext/useTheme";
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from "./components/LanguageSwitcher";
 
 export default function App() {
   const { dark } = useTheme();
+  const { t } = useTranslation();
   return (
     <>
       <header>
@@ -25,7 +28,7 @@ export default function App() {
             src={`${import.meta.env.BASE_URL}images/profile.svg`} alt="Arash Asghari" />
           <h1 className="font-bold text-custom-gold" style={{fontFamily: 'caveat'}}>&nbsp;
             <Typewriter
-              words={["Arash Asghari"]}
+              words={[t('name')]}
               loop={0}
               cursor
               cursorStyle=""
@@ -39,6 +42,7 @@ export default function App() {
           <ToggleTheme />
         </div>
       </header>
+      <LanguageSwitcher />
       <main></main>
       <footer></footer>
     </>
