@@ -4,6 +4,7 @@
 
 @theme {
     --color-custom-gold: hsl(50, 100%, 35%);
+    --color-custom-dark-gold: hsl(50, 100%, 20%);
 }
 
 @layer base {

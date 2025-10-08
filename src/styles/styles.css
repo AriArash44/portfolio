@@ -1,6 +1,55 @@
 @font-face {
   font-family: "caveat";
+  src: url("/fonts/Caveat/Caveat-300.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "amiri";
+  src: url("/fonts/Amiri/Amiri-300.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "roboto";
+  src: url("/fonts/Roboto/Roboto-300.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "iranYekan";
+  src: url("/fonts/IranYekan/IranYekan-300.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "caveat";
   src: url("/fonts/Caveat/Caveat-400.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "amiri";
+  src: url("/fonts/Amiri/Amiri-400.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "roboto";
+  src: url("/fonts/Roboto/Roboto-400.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "iranYekan";
+  src: url("/fonts/IranYekan/IranYekan-400.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -13,8 +62,50 @@
   font-display: swap;
 }
 @font-face {
+  font-family: "amiri";
+  src: url("/fonts/Amiri/Amiri-500.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "roboto";
+  src: url("/fonts/Roboto/Roboto-500.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "iranYekan";
+  src: url("/fonts/IranYekan/IranYekan-500.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
   font-family: "caveat";
   src: url("/fonts/Caveat/Caveat-600.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "amiri";
+  src: url("/fonts/Amiri/Amiri-600.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "roboto";
+  src: url("/fonts/Roboto/Roboto-600.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "iranYekan";
+  src: url("/fonts/IranYekan/IranYekan-600.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -23,6 +114,34 @@
   font-family: "caveat";
   src: url("/fonts/Caveat/Caveat-700.ttf") format("truetype");
   font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "amiri";
+  src: url("/fonts/Amiri/Amiri-700.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "roboto";
+  src: url("/fonts/Roboto/Roboto-700.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "iranYekan";
+  src: url("/fonts/IranYekan/IranYekan-700.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "iranYekan-fanum";
+  src: url("/fonts/IranYekan/IranYekan-fanun.ttf") format("truetype");
+  font-weight: 300;
   font-style: normal;
   font-display: swap;
 }

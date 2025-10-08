@@ -6,10 +6,12 @@ import WhitePizzaIcon from "/icons/w_pizza.svg";
 import { useTheme } from "./contexts/themeContext/useTheme";
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from "./components/LanguageSwitcher";
+import i18n from "./i18n/i18n";
 
 export default function App() {
   const { dark } = useTheme();
   const { t } = useTranslation();
+  const lang = i18n.language;
   return (
     <>
       <header>
@@ -26,7 +28,7 @@ export default function App() {
         absolute top-16 sm:top-[50px] w-full sm:w-auto px-12 pointer-events-none">
           <img className="w-20 h-20 mt-4 sm:mt-0 rounded-full" style={{boxShadow: "0 0 20px rgba(0,0,0,0.4)"}}
             src={`${import.meta.env.BASE_URL}images/profile.svg`} alt="Arash Asghari" />
-          <h1 className="font-bold text-custom-gold" style={{fontFamily: 'caveat'}}>&nbsp;
+          <h1 className="font-bold text-custom-gold" style={{fontFamily: lang === 'fa' ? 'amiri' : 'caveat'}}>&nbsp;
             <Typewriter
               words={[t('name')]}
               loop={0}
@@ -38,11 +40,11 @@ export default function App() {
             />
           </h1>
         </div>
-        <div className="absolute top-10 right-0 rotate-90 sm:top-6 sm:right-7 sm:rotate-0">
+        <div className="flex gap-2 absolute top-10 end-0 sm:top-6 sm:end-8">
+          <LanguageSwitcher />
           <ToggleTheme />
         </div>
       </header>
-      <LanguageSwitcher />
       <main></main>
       <footer></footer>
     </>

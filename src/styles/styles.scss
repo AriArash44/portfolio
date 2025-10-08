@@ -1,4 +1,4 @@
-$font_weights: (400, 500, 600, 700);
+$font_weights: (300, 400, 500, 600, 700);
 
 @each $space in $font_weights {
     @font-face {
@@ -8,6 +8,35 @@ $font_weights: (400, 500, 600, 700);
         font-style: normal;
         font-display: swap;
     }
+    @font-face {
+        font-family: 'amiri';
+        src: url("/fonts/Amiri/Amiri-#{$space}.ttf") format("truetype");
+        font-weight: #{$space};
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'roboto';
+        src: url("/fonts/Roboto/Roboto-#{$space}.ttf") format("truetype");
+        font-weight: #{$space};
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'iranYekan';
+        src: url("/fonts/IranYekan/IranYekan-#{$space}.ttf") format("truetype");
+        font-weight: #{$space};
+        font-style: normal;
+        font-display: swap;
+    }
+}
+
+@font-face {
+    font-family: 'iranYekan-fanum';
+    src: url("/fonts/IranYekan/IranYekan-fanun.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
 }
 
 body.loading #root {
