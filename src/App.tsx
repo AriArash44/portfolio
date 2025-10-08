@@ -1,5 +1,5 @@
 import { Typewriter } from "react-simple-typewriter";
-import PizzaBackground from "./components/PizzaBackground";
+import PizzaBackgroundAuto from "./components/PizzaBackgroundAuto";
 import ToggleTheme from "./components/ToggleTheme";
 import PizzaIcon from "/icons/pizza.svg";
 import WhitePizzaIcon from "/icons/w_pizza.svg";
@@ -16,7 +16,7 @@ export default function App() {
     <>
       <header>
         <div className="flex justify-center m-2.5">
-          <PizzaBackground
+          <PizzaBackgroundAuto
             icon={<img src={dark ? WhitePizzaIcon : PizzaIcon} alt="pizza" />}
             tileSize={16}
             zoomScale={2}

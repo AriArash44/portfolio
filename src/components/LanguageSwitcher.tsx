@@ -9,7 +9,7 @@ const languages = [
 
 const LanguageSwitcherDropdown = () => {
     const [open, setOpen] = useState(false);
-    const [currentLang, setCurrentLang] = useState(i18n.language || "en");
+    const [currentLang, setCurrentLang] = useState(i18n.language || "En");
     const dropdownRef = useRef<HTMLDivElement | null>(null);
     const isPersian = i18n.language === 'fa';
     useOutsideClick(dropdownRef, () => setOpen(false));
@@ -21,7 +21,7 @@ const LanguageSwitcherDropdown = () => {
         setCurrentLang(lng);
         setOpen(false);
     };
-    const currentLabel = languages.find((l) => l.code === currentLang)?.label || "en";
+    const currentLabel = languages.find((l) => l.code === currentLang)?.label || "En";
     return (
       <div className={`relative inline-block transition-all duration-500 ${isPersian ? "translate-x-[-1.5rem]" : "translate-x-6"} sm:translate-x-0`} ref={dropdownRef}>
         <button onClick={() => setOpen((o) => !o)}

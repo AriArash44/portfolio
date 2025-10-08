@@ -9,7 +9,7 @@ type Props = {
   rows?: number;
 };
 
-export default function PizzaBackground({
+export default function PizzaBackgroundFull({
   icon,
   tileSize = 80,
   zoomScale = 2.0,
