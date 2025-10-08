@@ -21,7 +21,7 @@ const LanguageSwitcherDropdown = () => {
         setCurrentLang(lng);
         setOpen(false);
     };
-    const currentLabel = languages.find((l) => l.code === currentLang)?.label || "Language";
+    const currentLabel = languages.find((l) => l.code === currentLang)?.label || "en";
     return (
       <div className={`relative inline-block transition-all duration-500 ${isPersian ? "translate-x-[-1.5rem]" : "translate-x-6"} sm:translate-x-0`} ref={dropdownRef}>
         <button onClick={() => setOpen((o) => !o)}
