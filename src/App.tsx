@@ -40,6 +40,7 @@ export default function App() {
     }
   ];
   useEffect(() => {
+    document.documentElement.dir = i18n.language === 'fa' ? 'rtl' : 'ltr';
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
