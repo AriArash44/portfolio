@@ -13,9 +13,10 @@ export default function App() {
   const { dark } = useTheme();
   const { t } = useTranslation();
   const lang = i18n.language;
+  const baseUrl = import.meta.env.BASE_URL;
   const tools = [
     {
-      icon: "/icons/html.svg",
+      icon: `${baseUrl}icons/html.svg`,
       alt: "HTML5",
       title: "HTML",
       description: "this is animated",
@@ -23,7 +24,7 @@ export default function App() {
       imgPadding: "0"
     },
     {
-      icon: "/icons/css.svg",
+      icon: `${baseUrl}icons/css.svg`,
       alt: "CSS3",
       title: "CSS",
       description: "this is animated",
@@ -31,7 +32,7 @@ export default function App() {
       imgPadding: "0"
     },
     {
-      icon: "/icons/javascript.svg",
+      icon: `${baseUrl}icons/javascript.svg`,
       alt: "JavaScript",
       title: "JavaScript",
       description: "this is animated",
