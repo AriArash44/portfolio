@@ -46,3 +46,9 @@ body.loading #root {
 body.loaded #root {
     visibility: visible;
 }
+
+@for $i from 0 through 50 {
+    .pad-px-#{$i} {
+        padding: #{$i}px;
+    }
+}

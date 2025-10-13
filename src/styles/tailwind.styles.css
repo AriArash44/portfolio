@@ -5,6 +5,10 @@
 @theme {
     --color-custom-gold: hsl(50, 100%, 35%);
     --color-custom-dark-gold: hsl(50, 100%, 20%);
+    --color-custom-dark-gray: hsl(0, 0%, 20%);
+    --color-custom-light-gray: hsl(0, 0%, 90%);
+    --color-custom-second-dark-gray: hsl(0, 0%, 35%);
+    --color-custom-second-light-gray: hsl(0, 0%, 70%);
 }
 
 @layer base {
@@ -15,5 +19,35 @@
         h1 {
             font-size: var(--text-5xl);
         }
+    }
+    h2 {
+        font-size: var(--text-lg);
+    }
+    @media (min-width: 640px) {
+        h2 {
+            font-size: var(--text-2xl);
+        }
+    }
+    h3 {
+        font-size: var(--text-md);
+    }
+    @media (min-width: 640px) {
+        h3 {
+            font-size: var(--text-xl);
+        }
+    }
+    p {
+        font-size: var(--text-sm);
+    }
+    @media (min-width: 640px) {
+        p {
+            font-size: var(--text-md);
+        }
+    }
+    :root {
+        @apply text-custom-dark-gray;
+    }
+    .dark {
+        @apply text-custom-light-gray;
     }
 }

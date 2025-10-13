@@ -7,11 +7,56 @@ import { useTheme } from "./contexts/themeContext/useTheme";
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import i18n from "./i18n/i18n";
+import { useEffect } from "react";
 
 export default function App() {
   const { dark } = useTheme();
   const { t } = useTranslation();
   const lang = i18n.language;
+  const tools = [
+    {
+      icon: "/icons/html.svg",
+      alt: "HTML5",
+      title: "HTML",
+      description: "this is animated",
+      delay: "0",
+      imgPadding: "0"
+    },
+    {
+      icon: "/icons/css.svg",
+      alt: "CSS3",
+      title: "CSS",
+      description: "this is animated",
+      delay: "100",
+      imgPadding: "0"
+    },
+    {
+      icon: "/icons/javascript.svg",
+      alt: "JavaScript",
+      title: "JavaScript",
+      description: "this is animated",
+      delay: "200",
+      imgPadding: "10"
+    }
+  ];
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('opacity-0', 'translate-y-8');
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    const animatedElements = document.querySelectorAll('.scroll-animate');
+    animatedElements.forEach(el => observer.observe(el));
+    return () => {
+      animatedElements.forEach(el => observer.unobserve(el));
+    };
+  }, []);
   return (
     <>
       <header>
@@ -45,7 +90,22 @@ export default function App() {
           <ToggleTheme />
         </div>
       </header>
-      <main></main>
+      <main className="p-12 mx-[5%] ">
+        <h2 className="text-center text-custom-gray" style={{fontFamily: lang === 'fa' ? 'amiri' : 'caveat'}}>"{t("bio")}"</h2>
+        <h3 className="mt-10 mb-3 text-custom-second-dark-gray dark:text-custom-second-light-gray font-bold">{t('toolTitle')}</h3>    
+        {tools.map((tool, index) => (
+          <div key={index}
+            className={`scroll-animate flex items-center gap-3 opacity-0 translate-y-8 transition-all duration-700 delay-${tool.delay}
+            mt-1 mx-auto w-4/5`}
+          >
+            <img src={tool.icon} alt={tool.alt} className={`h-20 w-20 pad-px-${tool.imgPadding}`} />
+            <div>
+              <h3 className="text-custom-dark-gray dark:text-custom-light-gray">{tool.title}</h3>
+              <p className="text-custom-second-dark-gray dark:text-custom-second-light-gray">{tool.description}</p>
+            </div>  
+          </div>
+        ))}
+      </main>
       <footer></footer>
     </>
   );
