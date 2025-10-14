@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import PizzaBackgroundFull from "./PizzaBackgroundFull";
-import PizzaBackgroundSimple from "./PizzaBackgroundSimple";
+import { useTheme } from "../contexts/themeContext/useTheme";
 
 type Props = {
     icon: React.ReactNode;
@@ -12,6 +12,7 @@ type Props = {
 };
 
 export default function PizzaBackgroundAuto(props: Props) {
+    const { dark } = useTheme();
     const isFirefox = useMemo(() => {
         if (typeof navigator === "undefined") return false;
         return navigator.userAgent.toLowerCase().includes("firefox");
@@ -19,6 +20,9 @@ export default function PizzaBackgroundAuto(props: Props) {
     return isFirefox ? (
         <PizzaBackgroundFull {...props} />
     ) : (
-        <PizzaBackgroundSimple rows={3} icon={props.icon} tileSize={55} />
+        <div className="h-40 w-full bg-repeat-x" style={{
+            backgroundImage: `url(${dark ? "/images/w_pizzaBackground.png" : "/images/pizzaBackground.png"})`,
+            backgroundSize: 'auto 100%'
+        }} />
     );
 }
