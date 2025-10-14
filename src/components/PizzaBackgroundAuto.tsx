@@ -12,6 +12,7 @@ type Props = {
 };
 
 export default function PizzaBackgroundAuto(props: Props) {
+    const baseUrl = import.meta.env.BASE_URL;
     const { dark } = useTheme();
     const isFirefox = useMemo(() => {
         if (typeof navigator === "undefined") return false;
@@ -21,7 +22,7 @@ export default function PizzaBackgroundAuto(props: Props) {
         <PizzaBackgroundFull {...props} />
     ) : (
         <div className="h-40 w-full bg-repeat-x" style={{
-            backgroundImage: `url(${dark ? "/images/w_pizzaBackground.png" : "/images/pizzaBackground.png"})`,
+            backgroundImage: `url(${dark ? `${baseUrl}images/w_pizzaBackground.jpeg` : `${baseUrl}images/pizzaBackground.jpeg`})`,
             backgroundSize: 'auto 100%'
         }} />
     );
