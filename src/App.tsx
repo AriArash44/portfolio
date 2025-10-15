@@ -3,6 +3,7 @@ import PizzaBackgroundAuto from "./components/PizzaBackgroundAuto";
 import ToggleTheme from "./components/ToggleTheme";
 import PizzaIcon from "/icons/pizza.svg";
 import WhitePizzaIcon from "/icons/w_pizza.svg";
+import { ToolDescription } from "./components/ToolDescription";
 import { useTheme } from "./contexts/themeContext/useTheme";
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from "./components/LanguageSwitcher";
@@ -96,16 +97,7 @@ export default function App() {
         <h2 className="text-center text-custom-gray" style={{fontFamily: lang === 'fa' ? 'amiri' : 'caveat'}}>"{t("bio")}"</h2>
         <h3 className="mt-10 mb-3 text-custom-second-dark-gray dark:text-custom-second-light-gray font-bold">{t('toolTitle')}</h3>    
         {tools.map((tool, index) => (
-          <div key={index}
-            className={`scroll-animate flex items-center gap-3 opacity-0 translate-y-8 transition-all duration-700 delay-${tool.delay}
-            mt-1 mx-auto w-4/5`}
-          >
-            <img src={tool.icon} alt={tool.alt} className={`h-20 w-20 pad-px-${tool.imgPadding}`} />
-            <div>
-              <h3 className="text-custom-dark-gray dark:text-custom-light-gray">{tool.title}</h3>
-              <p className="text-custom-second-dark-gray dark:text-custom-second-light-gray">{tool.description}</p>
-            </div>  
-          </div>
+          <ToolDescription key={index} {...tool} index={index}/>
         ))}
       </main>
       <footer></footer>
