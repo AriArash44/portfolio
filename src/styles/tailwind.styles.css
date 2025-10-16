@@ -5,6 +5,7 @@
 @theme {
     --color-custom-gold: hsl(50, 100%, 35%);
     --color-custom-dark-gold: hsl(50, 100%, 20%);
+    --color-custom-light-gold: hsl(50, 100%, 50%);
     --color-custom-dark-gray: hsl(0, 0%, 20%);
     --color-custom-light-gray: hsl(0, 0%, 90%);
     --color-custom-second-dark-gray: hsl(0, 0%, 35%);

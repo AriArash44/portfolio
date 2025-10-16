@@ -20,7 +20,7 @@ export default function App() {
       icon: `${baseUrl}icons/html.svg`,
       alt: "HTML5",
       title: "HTML",
-      description: "this is animated",
+      description: t("htmlE"),
       delay: "0",
       imgPadding: "0"
     },
@@ -28,7 +28,7 @@ export default function App() {
       icon: `${baseUrl}icons/css.svg`,
       alt: "CSS3",
       title: "CSS",
-      description: "this is animated",
+      description: t("cssE"),
       delay: "100",
       imgPadding: "0"
     },
@@ -36,7 +36,7 @@ export default function App() {
       icon: `${baseUrl}icons/javascript.svg`,
       alt: "JavaScript",
       title: "JavaScript",
-      description: "this is animated",
+      description: t("jsE"),
       delay: "200",
       imgPadding: "10"
     }
@@ -95,6 +95,11 @@ export default function App() {
       </header>
       <main className="p-12 mx-[5%] ">
         <h2 className="text-center text-custom-gray" style={{fontFamily: lang === 'fa' ? 'amiri' : 'caveat'}}>"{t("bio")}"</h2>
+        <a href={lang === "fa" ? "http://drive.google.com/uc?export=download&id=1k6oIpGRI18_BLHylTr4QLcgOd1PBW4a4" : 
+          "https://drive.google.com/uc?export=download&id=1hpnXTm_RBYUH497AbACkvid1Svj7hus2"}
+          className="block text-center mt-3 underline text-custom-gold hover:text-custom-dark-gold dark:hover:text-custom-light-gold">
+          {lang === "fa" ? "دانلود رزومه من" : "Download My Resume"}
+        </a>
         <h3 className="mt-10 mb-3 text-custom-second-dark-gray dark:text-custom-second-light-gray font-bold">{t('toolTitle')}</h3>    
         {tools.map((tool, index) => (
           <ToolDescription key={index} {...tool} index={index}/>
