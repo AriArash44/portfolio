@@ -21,6 +21,10 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval 
     const timeoutRef = useRef<number | null>(null);
     const currentIndexRef = useRef<number>(0);
     const transitionTimeoutRef = useRef<number | null>(null);
+    const [touchStart, setTouchStart] = useState<number | null>(null);
+    const [touchEnd, setTouchEnd] = useState<number | null>(null);
+    const carouselRef = useRef<HTMLDivElement>(null);
+    const minSwipeDistance = 50;
     const lang = i18n.language;
     useEffect(() => {
         currentIndexRef.current = currentIndex;
@@ -105,8 +109,34 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval 
         if (!slideDirection) return '';
         return slideDirection === 'left' ? 'slide-in-left' : 'slide-in-right';
     }, [slideDirection]);
+    const handleTouchStart = useCallback((e: React.TouchEvent) => {
+        if (isTransitioning) return;
+        setTouchEnd(null);
+        setTouchStart(e.targetTouches[0].clientX);
+    }, [isTransitioning]);
+    const handleTouchMove = useCallback((e: React.TouchEvent) => {
+        if (!touchStart) return;
+        setTouchEnd(e.targetTouches[0].clientX);
+    }, [touchStart]);
+        const handleTouchEnd = useCallback(() => {
+        if (!touchStart || !touchEnd || isTransitioning) return;
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
+        if (isLeftSwipe) {
+            goToNext();
+        } else if (isRightSwipe) {
+            goToPrev();
+        }
+        setTouchStart(null);
+        setTouchEnd(null);
+    }, [touchStart, touchEnd, isTransitioning, goToNext, goToPrev]);
     return (
-        <div className="carousel relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg">
+        <div className="carousel relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg"
+                ref={carouselRef}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}>
             {isLoading && (
                 <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 flex items-center justify-center z-10">
                     <div className="text-center">
@@ -117,7 +147,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval 
                     </div>
                 </div>
             )}
-            <div className={`relative w-full h-80 md:h-96 ${getSlideClasses()}`}>
+            <div className={`relative w-full h-100 md:h-120 ${getSlideClasses()}`}>
                 <img 
                     key={currentIndex} 
                     src={images[currentIndex].src} 
@@ -134,7 +164,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval 
             <button 
                 onClick={goToNext} 
                 disabled={isTransitioning}
-                className={`absolute top-1/2 transform -translate-y-1/2 
+                className={`hidden sm:block absolute top-1/2 transform -translate-y-1/2 
                         ${lang === "fa" ? "translate-x-1/2 left-0" : "-translate-x-1/2 right-0" }
                         bg-custom-gold/50 text-white rounded-full hover:bg-custom-gold/90 
                         transition-all disabled:opacity-50 disabled:cursor-not-allowed z-20
@@ -145,7 +175,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval 
             <button 
                 onClick={goToPrev} 
                 disabled={isTransitioning}
-                className={`absolute top-1/2 transform -translate-y-1/2
+                className={`hidden sm:block absolute top-1/2 transform -translate-y-1/2
                         ${lang === "fa" ? "-translate-x-1/2 right-0" : "translate-x-1/2 left-0" }
                         bg-custom-gold/50 text-white rounded-full hover:bg-custom-gold/90 
                         transition-all disabled:opacity-50 disabled:cursor-not-allowed z-20
@@ -153,26 +183,18 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval 
             >
                 <span className="text-2xl leading-none pb-1">‹</span>
             </button>
-            <div className="flex justify-center mt-4 space-x-3 mb-1">
+            <div className="flex justify-center mt-4 space-x-1 sm:space-x-3 mb-1">
                 {images.map((_, index) => (
                     <button 
                         key={index} 
                         onClick={() => goToSlide(index, index > currentIndex ? 'left' : 'right')}
                         disabled={isTransitioning}
-                        className={`cursor-pointer relative transition-all duration-300 ${
-                            index === currentIndex 
-                                ? 'scale-125 bg-blue-600' 
+                        className={`cursor-pointer relative transition-all duration-300 w-2 h-2 sm:w-3.5 sm:h-3.5 rounded-full 
+                            ${index === currentIndex 
+                                ? 'scale-125 bg-custom-gold' 
                                 : 'bg-gray-300 hover:bg-gray-400'
                         } ${isTransitioning ? 'opacity-50' : 'opacity-100'}`}
-                        style={{
-                            width: '12px',
-                            height: '12px',
-                            borderRadius: '50%'
-                        }}
                     >
-                        {isImagePreloaded(index) && (
-                            <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></div>
-                        )}
                     </button>
                 ))}
             </div>

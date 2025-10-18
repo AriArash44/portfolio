@@ -80,14 +80,15 @@ export default function App() {
         <h2 className="text-center text-custom-gray" style={{fontFamily: lang === 'fa' ? 'amiri' : 'caveat'}}>"{t("bio")}"</h2>
         <a href={lang === "fa" ? "http://drive.google.com/uc?export=download&id=1k6oIpGRI18_BLHylTr4QLcgOd1PBW4a4" : 
           "https://drive.google.com/uc?export=download&id=1hpnXTm_RBYUH497AbACkvid1Svj7hus2"}
-          className="block text-center mt-3 underline text-custom-gold hover:text-custom-dark-gold dark:hover:text-custom-light-gold">
+          className="block text-center mt-3 underline text-custom-gold hover:text-custom-dark-gold
+          sm:text-xl dark:hover:text-custom-light-gold">
           {lang === "fa" ? "دانلود رزومه من" : "Download My Resume"}
         </a>
         <h3 className="mt-10 mb-3 text-custom-second-dark-gray dark:text-custom-second-light-gray font-bold">{t('toolTitle')}</h3>    
         {tools.map((tool, index) => (
           <ToolDescription key={index} {...tool} index={index}/>
         ))}
-        <div className="w-5/6 h-64 m-auto mt-6 mb-60">
+        <div className="w-5/6 m-auto mt-6 mb-60">
           <Suspense fallback={<div className="loader m-auto mt-32"></div>}>
             <LazyCarousel images={images} interval={4000} />
           </Suspense>

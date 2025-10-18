@@ -72,7 +72,7 @@ export const getToolsData = (t: TFunction) => [
     {
         icon: `${baseUrl}icons/other_tools.svg`,
         alt: "more tools",
-        title: lang === "fa" ? "و چند ابزار دیگر" : "And some more tools",
+        title: lang === "fa" ? "ابزارهای دیگر" : "more tools",
         description: t("moreE"),
         delay: "200",
         imgPadding: "10"
