@@ -8,8 +8,11 @@ import { useTheme } from "./contexts/themeContext/useTheme";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import i18n from "./i18n/i18n";
 import { useTranslation } from 'react-i18next';
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { getToolsData } from './consts/tools';
+import { images } from "./consts/frontendmentor";
+
+const LazyCarousel = lazy(() => import('./components/Carousel'));
 
 export default function App() {
   const { dark } = useTheme();
@@ -79,6 +82,12 @@ export default function App() {
         {tools.map((tool, index) => (
           <ToolDescription key={index} {...tool} index={index}/>
         ))}
+        <Suspense fallback={
+          <div className="carousel-skeleton w-full max-w-4xl h-96 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
+            <span>loading Carousel</span>
+          </div>}>
+          <LazyCarousel images={images} autoPlay={true} interval={4000} />
+        </Suspense>
       </main>
       <footer></footer>
     </>
