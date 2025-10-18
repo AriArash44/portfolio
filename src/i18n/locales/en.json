@@ -4,5 +4,11 @@
   "toolTitle": "Tools I work with as front-end developer:",
   "htmlE": "Crafting the structural backbone of every web page.",
   "cssE": "Transforming designs into visual experiences.",
-  "jsE": "Engineering interactive and dynamic web experiences."
+  "jsE": "Engineering interactive and dynamic web experiences.",
+  "reactE": "Building modern, component-based user interfaces with reusable and maintainable code.",
+  "tailwindE": "Rapidly building modern designs with utility-first CSS and responsive frameworks.",
+  "sassE": "Writing maintainable and organized CSS with variables, nesting, and mixins.",
+  "typescriptE": "type-safe version of JavaScript with enhanced developer experience.",
+  "gitE": "Managing code versions efficiently with version control and collaborative workflows.",
+  "moreE": "Including many other related technologies and development tools."
 }

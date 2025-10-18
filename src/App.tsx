@@ -5,42 +5,17 @@ import PizzaIcon from "/icons/pizza.svg";
 import WhitePizzaIcon from "/icons/w_pizza.svg";
 import { ToolDescription } from "./components/ToolDescription";
 import { useTheme } from "./contexts/themeContext/useTheme";
-import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import i18n from "./i18n/i18n";
+import { useTranslation } from 'react-i18next';
 import { useEffect } from "react";
+import { getToolsData } from './consts/tools';
 
 export default function App() {
   const { dark } = useTheme();
   const { t } = useTranslation();
+  const tools = getToolsData(t);
   const lang = i18n.language;
-  const baseUrl = import.meta.env.BASE_URL;
-  const tools = [
-    {
-      icon: `${baseUrl}icons/html.svg`,
-      alt: "HTML5",
-      title: "HTML",
-      description: t("htmlE"),
-      delay: "0",
-      imgPadding: "0"
-    },
-    {
-      icon: `${baseUrl}icons/css.svg`,
-      alt: "CSS3",
-      title: "CSS",
-      description: t("cssE"),
-      delay: "100",
-      imgPadding: "0"
-    },
-    {
-      icon: `${baseUrl}icons/javascript.svg`,
-      alt: "JavaScript",
-      title: "JavaScript",
-      description: t("jsE"),
-      delay: "200",
-      imgPadding: "10"
-    }
-  ];
   useEffect(() => {
     document.documentElement.dir = i18n.language === 'fa' ? 'rtl' : 'ltr';
     const observer = new IntersectionObserver((entries) => {

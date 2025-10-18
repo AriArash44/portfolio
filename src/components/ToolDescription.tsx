@@ -36,7 +36,8 @@ export const ToolDescription = (props: ToolDescriptionProps) => {
                 <p className="hidden sm:block text-custom-second-dark-gray dark:text-custom-second-light-gray">{props.description}</p>
                 <img ref={refs.setReference} {...getReferenceProps()}
                 className={`relative cursor-pointer sm:hidden w-6 h-6 hover:opacity-50 transition-opacity rounded-full border-1 p-1
-                ${lang === "fa" ? "scale-x-[-1]" : "" }`} src={dark ? "/icons/w_question_mark.svg" : "/icons/question_mark.svg"} alt="?" />
+                ${lang === "fa" ? "scale-x-[-1]" : "" }`} src={dark ? `${import.meta.env.BASE_URL}icons/w_question_mark.svg` : 
+                `${import.meta.env.BASE_URL}icons/question_mark.svg`} alt="?" />
             </div>
             {isOpen && (
                 <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}
