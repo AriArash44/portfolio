@@ -12,7 +12,12 @@ import { useEffect, lazy, Suspense } from "react";
 import { getToolsData } from './consts/tools';
 import { images } from "./consts/frontendmentor";
 
-const LazyCarousel = lazy(() => import('./components/Carousel'));
+const LazyCarousel = lazy(() => 
+  Promise.all([
+    import('./components/Carousel'),
+    new Promise(resolve => setTimeout(resolve, 2000))
+  ]).then(([module]) => module)
+);
 
 export default function App() {
   const { dark } = useTheme();
@@ -82,12 +87,11 @@ export default function App() {
         {tools.map((tool, index) => (
           <ToolDescription key={index} {...tool} index={index}/>
         ))}
-        <Suspense fallback={
-          <div className="carousel-skeleton w-full max-w-4xl h-96 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center">
-            <span>loading Carousel</span>
-          </div>}>
-          <LazyCarousel images={images} autoPlay={true} interval={4000} />
-        </Suspense>
+        <div className="w-5/6 h-64 m-auto mt-6 mb-60">
+          <Suspense fallback={<div className="loader m-auto mt-32"></div>}>
+            <LazyCarousel images={images} interval={4000} />
+          </Suspense>
+        </div>
       </main>
       <footer></footer>
     </>

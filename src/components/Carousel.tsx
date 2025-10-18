@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import i18n from "../i18n/i18n";
 
 export interface CarouselImage {
     src: string;
@@ -13,72 +14,169 @@ export interface CarouselProps {
 
 const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval = 3000 }) => {
     const [currentIndex, setCurrentIndex] = useState<number>(0);
-    const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set([0]));
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [slideDirection, setSlideDirection] = useState<'left' | 'right' | null>(null);
+    const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
+    const loadedImagesRef = useRef<Set<number>>(new Set([0]));
+    const timeoutRef = useRef<number | null>(null);
+    const currentIndexRef = useRef<number>(0);
+    const transitionTimeoutRef = useRef<number | null>(null);
+    const lang = i18n.language;
     useEffect(() => {
+        currentIndexRef.current = currentIndex;
+    }, [currentIndex]);
+    useEffect(() => {
+        return () => {
+            if (timeoutRef.current) {
+                window.clearInterval(timeoutRef.current);
+            }
+            if (transitionTimeoutRef.current) {
+                window.clearTimeout(transitionTimeoutRef.current);
+            }
+        };
+    }, []);
+    const preloadImages = useCallback((index: number) => {
         const indicesToPreload = [
-            currentIndex,
-            (currentIndex + 1) % images.length,
-            (currentIndex - 1 + images.length) % images.length
+            index,
+            (index + 1) % images.length,
+            (index - 1 + images.length) % images.length
         ];
-        indicesToPreload.forEach((index) => {
-            if (!loadedImages.has(index)) {
+        indicesToPreload.forEach((preloadIndex) => {
+            if (!loadedImagesRef.current.has(preloadIndex)) {
                 const img = new Image();
-                img.src = images[index].src;
+                img.src = images[preloadIndex].src;
                 img.onload = () => {
-                    setLoadedImages(prev => new Set([...prev, index]));
+                    loadedImagesRef.current.add(preloadIndex);
                 };
                 img.onerror = () => {
-                    console.error(`Failed to load image: ${images[index].src}`);
+                    console.error(`Failed to preload image: ${images[preloadIndex].src}`);
                 };
             }
         });
-    }, [currentIndex, images, loadedImages]);
+    }, [images]);
     useEffect(() => {
-        if (!autoPlay) return;
-        const timer = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % images.length);
+        preloadImages(currentIndex);
+    }, [currentIndex, preloadImages]);
+    useEffect(() => {
+        if (!autoPlay) return;  
+        timeoutRef.current = window.setInterval(() => {
+            setCurrentIndex(prev => (prev + 1) % images.length);
         }, interval);
-        return () => clearInterval(timer);
+        return () => {
+            if (timeoutRef.current) {
+                window.clearInterval(timeoutRef.current);
+                timeoutRef.current = null;
+            }
+        };
     }, [autoPlay, interval, images.length]);
-    const goToSlide = (index: number): void => {
+    const goToSlide = useCallback((index: number, direction: 'left' | 'right'): void => {
+        if (index === currentIndexRef.current || isTransitioning) return;
+        setIsTransitioning(true);
+        setSlideDirection(direction);
         setCurrentIndex(index);
-    };
-    const goToNext = (): void => {
-        setCurrentIndex((prev) => (prev + 1) % images.length);
-    };
-    const goToPrev = (): void => {
-        setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-    };
-    const handleImageLoad = (): void => {
+        setIsLoading(true);
+        if (transitionTimeoutRef.current) {
+            window.clearTimeout(transitionTimeoutRef.current);
+        }
+        transitionTimeoutRef.current = window.setTimeout(() => {
+            setIsTransitioning(false);
+            setSlideDirection(null);
+        }, 500);
+    }, [isTransitioning]);
+    const goToNext = useCallback((): void => {
+        const nextIndex = (currentIndexRef.current + 1) % images.length;
+        goToSlide(nextIndex, 'left');
+    }, [goToSlide, images.length]);
+    const goToPrev = useCallback((): void => {
+        const prevIndex = (currentIndexRef.current - 1 + images.length) % images.length;
+        goToSlide(prevIndex, 'right');
+    }, [goToSlide, images.length]);
+    const handleImageLoad = useCallback((): void => {
         setIsLoading(false);
-    };
-    const handleImageError = (): void => {
+    }, []);
+    const handleImageError = useCallback((): void => {
         console.error('Failed to load current image');
         setIsLoading(false);
-    };
+    }, []);
+    const isImagePreloaded = useCallback((index: number): boolean => {
+        return loadedImagesRef.current.has(index);
+    }, []);
+    const getSlideClasses = useCallback((): string => {
+        if (!slideDirection) return '';
+        return slideDirection === 'left' ? 'slide-in-left' : 'slide-in-right';
+    }, [slideDirection]);
     return (
-      <div className="carousel relative w-full max-w-4xl mx-auto">
-        {isLoading && (
-          <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
-            <span>در حال بارگیری تصویر...</span>
-          </div>
-        )}
-        <img key={currentIndex} src={images[currentIndex].src} alt={images[currentIndex].alt}
-          className={`carousel-img w-full h-auto transition-opacity duration-300 ${ isLoading ? 'opacity-0' : 'opacity-100'}`}
-          onLoad={handleImageLoad} onError={handleImageError} loading={currentIndex === 0 ? "eager" : "lazy"} decoding="async"/>
-        <button onClick={goToPrev} className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors">‹</button>
-        <button onClick={goToNext} className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors">›</button>
-        <div className="flex justify-center mt-4 space-x-2">
-          {images.map((_, index) => (
-            <button key={index} onClick={() => goToSlide(index)} className={`w-3 h-3 rounded-full transition-colors ${
-              index === currentIndex ? 'bg-blue-600' : 'bg-gray-300 hover:bg-gray-400'}`}/>
-          ))}
+        <div className="carousel relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg">
+            {isLoading && (
+                <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 flex items-center justify-center z-10">
+                    <div className="text-center">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-3"></div>
+                        <p className="text-gray-600 dark:text-gray-300">
+                            {isImagePreloaded(currentIndex) ? 'Almost ready...' : 'Loading image...'}
+                        </p>
+                    </div>
+                </div>
+            )}
+            <div className={`relative w-full h-80 md:h-96 ${getSlideClasses()}`}>
+                <img 
+                    key={currentIndex} 
+                    src={images[currentIndex].src} 
+                    alt={images[currentIndex].alt}
+                    className={`w-full h-full object-cover transition-all duration-500 ${
+                        isLoading ? 'opacity-0' : 'opacity-100'
+                    }`}
+                    onLoad={handleImageLoad} 
+                    onError={handleImageError} 
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
+            <button 
+                onClick={goToNext} 
+                disabled={isTransitioning}
+                className={`absolute top-1/2 transform -translate-y-1/2 
+                        ${lang === "fa" ? "translate-x-1/2 left-0" : "-translate-x-1/2 right-0" }
+                        bg-custom-gold/50 text-white rounded-full hover:bg-custom-gold/90 
+                        transition-all disabled:opacity-50 disabled:cursor-not-allowed z-20
+                        w-12 h-12 flex items-center justify-center cursor-pointer`}
+            >
+                <span className="text-2xl leading-none pb-1">›</span>
+            </button>
+            <button 
+                onClick={goToPrev} 
+                disabled={isTransitioning}
+                className={`absolute top-1/2 transform -translate-y-1/2
+                        ${lang === "fa" ? "-translate-x-1/2 right-0" : "translate-x-1/2 left-0" }
+                        bg-custom-gold/50 text-white rounded-full hover:bg-custom-gold/90 
+                        transition-all disabled:opacity-50 disabled:cursor-not-allowed z-20
+                        w-12 h-12 flex items-center justify-center cursor-pointer`}
+            >
+                <span className="text-2xl leading-none pb-1">‹</span>
+            </button>
+            <div className="flex justify-center mt-4 space-x-3 mb-1">
+                {images.map((_, index) => (
+                    <button 
+                        key={index} 
+                        onClick={() => goToSlide(index, index > currentIndex ? 'left' : 'right')}
+                        disabled={isTransitioning}
+                        className={`cursor-pointer relative transition-all duration-300 ${
+                            index === currentIndex 
+                                ? 'scale-125 bg-blue-600' 
+                                : 'bg-gray-300 hover:bg-gray-400'
+                        } ${isTransitioning ? 'opacity-50' : 'opacity-100'}`}
+                        style={{
+                            width: '12px',
+                            height: '12px',
+                            borderRadius: '50%'
+                        }}
+                    >
+                        {isImagePreloaded(index) && (
+                            <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></div>
+                        )}
+                    </button>
+                ))}
+            </div>
         </div>
-        <div className="text-center mt-2 text-sm text-gray-600">
-          {loadedImages.has(currentIndex) ? 'loaded' : 'loading ...'}
-        </div>
-      </div>
     );
 };
 
