@@ -129,8 +129,8 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval 
         setTouchEnd(null);
     }, [touchStart, touchEnd, isTransitioning, goToNext, goToPrev]);
     return (
-        <div className="carousel relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg 
-                shadow-[0px_-15px_15px_5px_rgba(0,0,0,0.05)]"
+        <div className="carousel relative w-full mx-auto overflow-hidden rounded-lg 
+                shadow-[0px_-15px_15px_5px_rgba(0,0,0,0.05)] dark:shadow-gray-600/50"
                 ref={carouselRef}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
@@ -140,7 +140,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval 
                     <div className="loader"></div>
                 </div>
             )}
-            <div className={`relative w-full h-105 md:h-120 ${getSlideClasses()}`}>
+            <div className={`relative w-full h-110 ${getSlideClasses()}`}>
                 <img 
                     key={currentIndex} 
                     src={images[currentIndex].src} 

@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useState, useEffect, lazy, Suspense } from "react";
 import { getToolsData } from './consts/tools';
 import { desktopImages, mobileImages } from "./consts/frontendmentor";
+import { otherDesktopImages, otherMobileImages } from "./consts/otherproject";
 import type { CarouselImage } from "./components/Carousel";
 
 const LazyCarousel = lazy(() => 
@@ -22,6 +23,7 @@ const LazyCarousel = lazy(() =>
 
 export default function App() {
   const [images, setImages] = useState<CarouselImage[]>([]);
+  const [otherImages, setOtherImages] = useState<CarouselImage[]>([]);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
   const { dark } = useTheme();
   const { t } = useTranslation();
@@ -51,6 +53,7 @@ export default function App() {
       setWindowWidth(window.innerWidth);
     };
     setImages(windowWidth < 640 ? mobileImages : desktopImages);
+    setOtherImages(windowWidth < 640 ? otherMobileImages : otherDesktopImages);
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -101,9 +104,21 @@ export default function App() {
         {tools.map((tool, index) => (
           <ToolDescription key={index} {...tool} index={index}/>
         ))}
-        <div className="w-5/6 m-auto mt-6 mb-60">
-          <Suspense fallback={<div className="loader m-auto mt-32"></div>}>
+        <h3 className="mt-10 mb-3 text-custom-second-dark-gray dark:text-custom-second-light-gray font-bold">{t('projectTitle')}</h3>
+        <p className="w-4/5 m-auto">{t('frontendmentorExplanation')}</p>
+        <div className="w-4/5 m-auto mt-6">
+          <Suspense fallback={<div className="loader m-auto my-32"></div>}>
             <LazyCarousel images={images} interval={4000} />
+          </Suspense>
+        </div>
+        <a href="https://ariarash44.github.io/frontend-mentor/"
+          className="block text-center mt-3 underline text-custom-gold hover:text-custom-dark-gold
+          sm:text-xl dark:hover:text-custom-light-gold">
+          {lang === "fa" ? "مشاهده دموی زنده" : "View Live Demo"}
+        </a>
+        <div className="w-4/5 m-auto mt-6">
+          <Suspense fallback={<div className="loader m-auto my-32"></div>}>
+            <LazyCarousel images={otherImages} interval={4000} />
           </Suspense>
         </div>
       </main>

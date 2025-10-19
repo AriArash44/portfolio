@@ -10,5 +10,7 @@
   "sassE": "Writing maintainable and organized CSS with variables, nesting, and mixins.",
   "typescriptE": "type-safe version of JavaScript with enhanced developer experience.",
   "gitE": "Managing code versions efficiently with version control and collaborative workflows.",
-  "moreE": "Including many other related technologies and development tools."
+  "moreE": "Including many other related technologies and development tools.",
+  "projectTitle": "Some sample projects:",
+  "frontendmentorExplanation": "In recent months, with the goal of enhancing my skills, I have been working on a series of Frontend Mentor projects using various tools. This is an ongoing process, and the number of projects will continue to increase over time."
 }
