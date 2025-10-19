@@ -102,9 +102,6 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval 
         console.error('Failed to load current image');
         setIsLoading(false);
     }, []);
-    const isImagePreloaded = useCallback((index: number): boolean => {
-        return loadedImagesRef.current.has(index);
-    }, []);
     const getSlideClasses = useCallback((): string => {
         if (!slideDirection) return '';
         return slideDirection === 'left' ? 'slide-in-left' : 'slide-in-right';
@@ -132,22 +129,18 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval 
         setTouchEnd(null);
     }, [touchStart, touchEnd, isTransitioning, goToNext, goToPrev]);
     return (
-        <div className="carousel relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg"
+        <div className="carousel relative w-full max-w-4xl mx-auto overflow-hidden rounded-lg 
+                shadow-[0px_-15px_15px_5px_rgba(0,0,0,0.05)]"
                 ref={carouselRef}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}>
             {isLoading && (
                 <div className="absolute inset-0 bg-gray-100 dark:bg-gray-800 flex items-center justify-center z-10">
-                    <div className="text-center">
-                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-3"></div>
-                        <p className="text-gray-600 dark:text-gray-300">
-                            {isImagePreloaded(currentIndex) ? 'Almost ready...' : 'Loading image...'}
-                        </p>
-                    </div>
+                    <div className="loader"></div>
                 </div>
             )}
-            <div className={`relative w-full h-100 md:h-120 ${getSlideClasses()}`}>
+            <div className={`relative w-full h-105 md:h-120 ${getSlideClasses()}`}>
                 <img 
                     key={currentIndex} 
                     src={images[currentIndex].src} 

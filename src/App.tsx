@@ -8,9 +8,10 @@ import { useTheme } from "./contexts/themeContext/useTheme";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import i18n from "./i18n/i18n";
 import { useTranslation } from 'react-i18next';
-import { useEffect, lazy, Suspense } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { getToolsData } from './consts/tools';
-import { images } from "./consts/frontendmentor";
+import { desktopImages, mobileImages } from "./consts/frontendmentor";
+import type { CarouselImage } from "./components/Carousel";
 
 const LazyCarousel = lazy(() => 
   Promise.all([
@@ -20,6 +21,8 @@ const LazyCarousel = lazy(() =>
 );
 
 export default function App() {
+  const [images, setImages] = useState<CarouselImage[]>([]);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
   const { dark } = useTheme();
   const { t } = useTranslation();
   const tools = getToolsData(t);
@@ -43,6 +46,16 @@ export default function App() {
       animatedElements.forEach(el => observer.unobserve(el));
     };
   }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    setImages(windowWidth < 640 ? mobileImages : desktopImages);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [windowWidth]);
   return (
     <>
       <header>
