@@ -4,6 +4,7 @@ import i18n from "../i18n/i18n";
 export interface CarouselImage {
     src: string;
     alt: string;
+    altfa: string;
 }
 
 export interface CarouselProps {
@@ -12,9 +13,10 @@ export interface CarouselProps {
     interval?: number;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval = 3000 }) => {
+const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval = 4000 }) => {
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [showOverlay, setShowOverlay] = useState<boolean>(false);
     const [slideDirection, setSlideDirection] = useState<'left' | 'right' | null>(null);
     const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
     const loadedImagesRef = useRef<Set<number>>(new Set([0]));
@@ -61,18 +63,6 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval 
     useEffect(() => {
         preloadImages(currentIndex);
     }, [currentIndex, preloadImages]);
-    useEffect(() => {
-        if (!autoPlay) return;  
-        timeoutRef.current = window.setInterval(() => {
-            setCurrentIndex(prev => (prev + 1) % images.length);
-        }, interval);
-        return () => {
-            if (timeoutRef.current) {
-                window.clearInterval(timeoutRef.current);
-                timeoutRef.current = null;
-            }
-        };
-    }, [autoPlay, interval, images.length]);
     const goToSlide = useCallback((index: number, direction: 'left' | 'right'): void => {
         if (index === currentIndexRef.current || isTransitioning) return;
         setIsTransitioning(true);
@@ -128,6 +118,27 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval 
         setTouchStart(null);
         setTouchEnd(null);
     }, [touchStart, touchEnd, isTransitioning, goToNext, goToPrev]);
+    useEffect(() => {
+        if (!autoPlay) return;  
+        timeoutRef.current = window.setInterval(() => {
+            goToNext();
+        }, interval);
+        return () => {
+            if (timeoutRef.current) {
+                window.clearInterval(timeoutRef.current);
+                timeoutRef.current = null;
+            }
+        };
+    }, [autoPlay, interval, images.length, goToNext]);
+    const handleShowOverlay = useCallback(() => {
+        setShowOverlay(true);
+    }, []);
+    const handleHideOverlay = useCallback(() => {
+        setShowOverlay(false);
+    }, []);
+    const handleImageClick = useCallback(() => {
+        setShowOverlay(prev => !prev);
+    }, []);
     return (
         <div className="carousel relative w-full mx-auto overflow-hidden rounded-lg 
                 shadow-[0px_-15px_15px_5px_rgba(0,0,0,0.05)] dark:shadow-gray-600/50"
@@ -140,7 +151,12 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval 
                     <div className="loader"></div>
                 </div>
             )}
-            <div className={`relative w-full h-110 ${getSlideClasses()}`}>
+            <div 
+                className={`relative w-full h-110 ${getSlideClasses()} cursor-pointer group`}
+                onMouseEnter={handleShowOverlay}
+                onMouseLeave={handleHideOverlay}
+                onClick={handleImageClick}
+            >
                 <img 
                     key={currentIndex} 
                     src={images[currentIndex].src} 
@@ -153,6 +169,16 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval 
                     loading="lazy"
                     decoding="async"
                 />
+                <div className={`
+                    absolute inset-0 transition-all duration-300 z-20
+                    ${showOverlay ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+                `}>
+                    <div className="relative w-full h-full flex items-center justify-center">
+                        <div className="text-white text-center z-30 relative font-bold text-xl w-4/5">
+                            {lang === "fa" ? images[currentIndex].altfa : images[currentIndex].alt}
+                        </div>
+                    </div>
+                </div>
             </div>
             <button 
                 onClick={goToNext} 

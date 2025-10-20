@@ -108,7 +108,7 @@ export default function App() {
         <p className="w-4/5 m-auto">{t('frontendmentorExplanation')}</p>
         <div className="w-4/5 m-auto mt-6">
           <Suspense fallback={<div className="loader m-auto my-32"></div>}>
-            <LazyCarousel images={images} interval={4000} />
+            <LazyCarousel images={images} autoPlay={true} />
           </Suspense>
         </div>
         <a href="https://ariarash44.github.io/frontend-mentor/"
@@ -116,11 +116,17 @@ export default function App() {
           sm:text-xl dark:hover:text-custom-light-gold">
           {lang === "fa" ? "مشاهده دموی زنده" : "View Live Demo"}
         </a>
+        <p className="w-4/5 m-auto mt-4">{t('otherExplanation')}</p>
         <div className="w-4/5 m-auto mt-6">
           <Suspense fallback={<div className="loader m-auto my-32"></div>}>
-            <LazyCarousel images={otherImages} interval={4000} />
+            <LazyCarousel images={otherImages} autoPlay={true} />
           </Suspense>
         </div>
+        <a href="https://github.com/AriArash44"
+          className="block text-center mt-3 underline text-custom-gold hover:text-custom-dark-gold
+          sm:text-xl dark:hover:text-custom-light-gold">
+          {lang === "fa" ? "مشاهده سورس کد پروژه‌ها" : "View projects source code"}
+        </a>
       </main>
       <footer></footer>
     </>

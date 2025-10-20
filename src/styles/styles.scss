@@ -121,3 +121,26 @@ body.loaded #root {
     transform-style: preserve-3d;
     backface-visibility: hidden;
 }
+
+.group::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.75);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.group:hover::before,
+.group[data-overlay-visible="true"]::before {
+    opacity: 1;
+}
+
+.overlay-visible::before {
+    opacity: 1;
+}
