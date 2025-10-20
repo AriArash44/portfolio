@@ -128,7 +128,26 @@ export default function App() {
           {lang === "fa" ? "مشاهده سورس کد پروژه‌ها" : "View projects source code"}
         </a>
       </main>
-      <footer></footer>
+      <footer className="flex flex-wrap gap-8 md:gap-16 md:px-16 p-8 shadow-[0px_-5px_15px_5px_rgba(0,0,0,0.05)] dark:shadow-gray-600/50">
+        <div className="flex flex-col md:flex-row gap-3 lg:gap-6">
+          <p className="font-bold">{lang === "fa" ? "آدرس پست الکترونیک" : "E-mail address"}</p>
+          <div>
+            <p className="opacity-60" dir="ltr">arashasghari1245@gmail.com</p>
+            <p className="opacity-60" dir="ltr">arashasghari408@gmail.com</p>
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row gap-3 lg:gap-6">
+          <p className="font-bold">{lang === "fa" ? "شماره تماس" : "Phone number"}</p>
+          <div>
+            <p className="opacity-60" dir="ltr">0996-6696067</p>
+            <p className="opacity-60" dir="ltr">0990-5608034</p>
+          </div>
+        </div>
+        <div className="flex-col md:flex-row gap-3 hidden lg:flex lg:gap-6">
+          <p className="font-bold">{lang === "fa" ? "لینکدین" : "LinkedIn"}</p>
+          <p className="opacity-60" dir="ltr">arash-ari44</p>
+        </div>
+      </footer>
     </>
   );
 }
