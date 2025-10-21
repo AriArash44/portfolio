@@ -13,6 +13,7 @@ import { getToolsData } from './consts/tools';
 import { desktopImages, mobileImages } from "./consts/frontendmentor";
 import { otherDesktopImages, otherMobileImages } from "./consts/otherproject";
 import type { CarouselImage } from "./components/Carousel";
+import { EducationCard } from "./components/EducationCard";
 
 const LazyCarousel = lazy(() => 
   Promise.all([
@@ -127,6 +128,7 @@ export default function App() {
           sm:text-xl dark:hover:text-custom-light-gold">
           {lang === "fa" ? "مشاهده سورس کد پروژه‌ها" : "View projects source code"}
         </a>
+        <EducationCard lang={lang} />
       </main>
       <footer className="flex flex-wrap gap-8 md:gap-16 md:px-16 p-8 shadow-[0px_-5px_15px_5px_rgba(0,0,0,0.05)] dark:shadow-gray-600/50">
         <div className="flex flex-col md:flex-row gap-3 lg:gap-6">
