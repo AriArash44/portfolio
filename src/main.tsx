@@ -19,6 +19,9 @@ async function prepare() {
   const { worker } = await import('./mocks/server.ts');
   await worker.start({
     onUnhandledRequest: 'bypass',
+    serviceWorker: {
+      url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
+    },
   });
 }
 
