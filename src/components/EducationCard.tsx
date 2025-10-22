@@ -2,13 +2,15 @@ import { useEducation } from '../hooks/useEducation';
 import { usePagination } from '../hooks/usePagination';
 import { ExpCard } from './ExpCard';
 import { createGregorianDate, toJalali, formatJalali, formatGregorian } from '../utils/dateUtils';
+import { useTheme } from '../contexts/themeContext/useTheme';
 
 interface EducationCardProps {
     lang: string;
 }
 
 export function EducationCard({ lang }: EducationCardProps) {
-    const { page, next, prev } = usePagination(0);
+    const { dark } = useTheme();
+    const { page, next, prev, goTo } = usePagination(0);
     const { data, isLoading, error } = useEducation(page, lang);
     if (isLoading || error || !data) {
         return <div className="loader" />;
@@ -28,26 +30,28 @@ export function EducationCard({ lang }: EducationCardProps) {
             <li>{data.explanation}</li>
           </ul>
         </ExpCard>
-
-        {/* here we must fix UI of pagination(maybe with a component) */}
-        <div className="flex justify-between mt-4">
-          <button
+        <div className='flex justify-center items-center gap-3'>
+          {page !== 0 && <button 
             onClick={prev}
-            disabled={page <= 0}
-            className="px-4 py-2 border rounded disabled:opacity-50"
-          >
-            Prev
-          </button>
-          <span>
-            Page {page + 1} of {totalPages}
-          </span>
-          <button
+            className="cursor-pointer relative transition-all duration-300 mt-3 rounded-full text-xs text-gray-600 dark:text-gray-800">
+              <img className={`w-3 h-3 ${lang === "fa" ? "rotate-180" : ""}`} src={dark ? `${import.meta.env.BASE_URL}icons/w_prev.png` : `${import.meta.env.BASE_URL}icons/prev.png`} alt='prev' />
+          </button>}
+          <div className="flex justify-center mt-4 space-x-3 mb-1">
+            {Array.from({length: totalPages}, (_, i) => i).map((_, index) => (
+              <button 
+              key={index} 
+              onClick={() => goTo(index, totalPages)}
+              className={`cursor-pointer relative transition-all duration-300 w-6 h-6 rounded-full text-xs
+              ${index === page ? 'scale-125 bg-custom-gold' : 'bg-gray-300 hover:bg-gray-400 text-gray-800'}`}>
+                {index + 1}
+              </button>
+            ))}
+          </div>
+          {page !== totalPages - 1 && <button 
             onClick={() => next(totalPages)}
-            disabled={page + 1 >= totalPages}
-            className="px-4 py-2 border rounded disabled:opacity-50"
-          >
-            Next
-          </button>
+            className="cursor-pointer relative transition-all duration-300 w-6 h-6 mt-3 rounded-full text-xs text-gray-600 dark:text-gray-800">
+              <img className={`w-3 h-3 ${lang === "fa" ? "rotate-180" : ""}`} src={dark ? `${import.meta.env.BASE_URL}icons/w_next.png` : `${import.meta.env.BASE_URL}icons/next.png`} alt='next' />
+          </button>}
         </div>
       </>
     );
