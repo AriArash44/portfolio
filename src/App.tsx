@@ -31,7 +31,7 @@ export default function App() {
   const { dark } = useTheme();
   const { t } = useTranslation();
   const tools = getToolsData(t);
-  const lang = i18n.language;
+  const lang = i18n.language.split("-")[0];
   useEffect(() => {
     document.documentElement.dir = i18n.language === 'fa' ? 'rtl' : 'ltr';
     const observer = new IntersectionObserver((entries) => {

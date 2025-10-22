@@ -27,7 +27,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlay = false, interval 
     const [touchEnd, setTouchEnd] = useState<number | null>(null);
     const carouselRef = useRef<HTMLDivElement>(null);
     const minSwipeDistance = 50;
-    const lang = i18n.language;
+    const lang = i18n.language.split("-")[0];
     useEffect(() => {
         currentIndexRef.current = currentIndex;
     }, [currentIndex]);

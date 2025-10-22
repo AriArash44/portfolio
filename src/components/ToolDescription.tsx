@@ -16,7 +16,7 @@ interface ToolDescriptionProps {
 export const ToolDescription = (props: ToolDescriptionProps) => {
     const { dark } = useTheme();
     const [isOpen, setIsOpen] = useState(false);
-    const lang = i18n.language;
+    const lang = i18n.language.split("-")[0];
     const { refs, floatingStyles, context } = useFloating({
         open: isOpen,
         onOpenChange: setIsOpen,

@@ -13,7 +13,7 @@ export function EducationCard({ lang }: EducationCardProps) {
     const { page, next, prev, goTo } = usePagination(0);
     const { data, isLoading, error } = useEducation(page, lang);
     if (isLoading || error || !data) {
-        return <div className="loader" />;
+        return <div className="loader m-auto my-10" />;
     }
     if (error) {
         console.log((error as Error).message);
