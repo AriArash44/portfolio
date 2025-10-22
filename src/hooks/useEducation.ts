@@ -2,8 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 
 type EducationResponse = {
     logo: string;
-//   title?: string;
-//   description?: string;
+    title: string;
+    level: string;
+    start: string;
+    end: string;
+    descipline: string;
+    score: string;
+    explanation: string;
     pages_num: number;
 };
 

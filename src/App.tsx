@@ -137,6 +137,7 @@ export default function App() {
           <p className="m-2 text-gray-800"><span className="font-bold">{lang === "fa" ? "سه ماه کارآموزی:" : "3-month Internship:"}</span> {t('workExp1')}</p>
           <p className="m-2 text-gray-800"><span className="font-bold">{lang === "fa" ? "نه ماه فعالیت حرفه‌ای:" : "9-month Front-End Developer Role:"}</span> {t('workExp2')}</p>
         </ExpCard>
+        <h3 className="mt-8 mb-3 text-custom-second-dark-gray dark:text-custom-second-light-gray font-bold">{t('educTitle')}</h3>
         <EducationCard lang={lang} />
       </main>
       <footer className="flex flex-wrap gap-8 md:gap-16 md:px-16 p-8 shadow-[0px_-5px_15px_5px_rgba(0,0,0,0.05)] dark:shadow-gray-600/50">

@@ -7,7 +7,6 @@ interface ExpCardProps {
     children: ReactNode;
 }
 
-
 export const ExpCard = ({logo, title, date, children}: ExpCardProps) => {
     return (
       <div className="w-4/5 bg-gray-50 dark:bg-gray-300 text-gray-900 m-auto mt-4 p-6
@@ -15,7 +14,12 @@ export const ExpCard = ({logo, title, date, children}: ExpCardProps) => {
         <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 mb-6">
           <img src={logo} alt={title} className="w-20 h-20" />
           <div>
-            <h4 className="font-semibold ms-2 mt-2">{title}</h4>
+            <h4 className="font-semibold ms-2 mt-2">
+              {title.split("(")[0]}
+              {title.split("(").length > 1 && 
+                <span className="font-light italic text-gray-800"> {"("}{title.split("(")[1]}</span>
+              }
+            </h4>
             <p className="font-light ms-2 mt-1">{date}</p>
           </div>
         </div>
