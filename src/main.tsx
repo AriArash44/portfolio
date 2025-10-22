@@ -16,13 +16,15 @@ const queryClient = new QueryClient({
 });
 
 async function prepare() {
-  const { worker } = await import('./mocks/server.ts');
-  await worker.start({
-    onUnhandledRequest: 'bypass',
-    serviceWorker: {
-      url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
-    },
-  });
+  if (import.meta.env.MODE === 'development') {
+    const { worker } = await import('./mocks/server.ts');
+    await worker.start({
+      onUnhandledRequest: 'bypass',
+      serviceWorker: {
+        url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
+      },
+    });
+  }
 }
 
 prepare().then(() => {
