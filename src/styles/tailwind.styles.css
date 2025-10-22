@@ -37,6 +37,14 @@
             font-size: var(--text-xl);
         }
     }
+    h4 {
+        font-size: var(--text-md);
+    }
+    @media (min-width: 640px) {
+        h4 {
+            font-size: var(--text-lg);
+        }
+    }
     p {
         font-size: var(--text-sm);
     }

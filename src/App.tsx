@@ -14,6 +14,8 @@ import { desktopImages, mobileImages } from "./consts/frontendmentor";
 import { otherDesktopImages, otherMobileImages } from "./consts/otherproject";
 import type { CarouselImage } from "./components/Carousel";
 import { EducationCard } from "./components/EducationCard";
+import { ExpCard } from "./components/ExpCard";
+import { createGregorianDate, toJalali, formatJalali, formatGregorian } from './utils/dateUtils';
 
 const LazyCarousel = lazy(() => 
   Promise.all([
@@ -128,6 +130,13 @@ export default function App() {
           sm:text-xl dark:hover:text-custom-light-gold">
           {lang === "fa" ? "مشاهده سورس کد پروژه‌ها" : "View projects source code"}
         </a>
+        <h3 className="mt-10 mb-3 text-custom-second-dark-gray dark:text-custom-second-light-gray font-bold">{t('workTitle')}</h3>
+        <ExpCard logo={`${import.meta.env.BASE_URL}logos/ScalesOps.svg`} title={lang === "fa" ? "شرکت ScalesOps" : "ScalesOps office"} 
+        date={lang === "en" ? `${formatGregorian(createGregorianDate(2023, 8), "MMMM YYYY")} - ${formatGregorian(createGregorianDate(2024, 7), "MMMM YYYY")}` : 
+        `${formatJalali(toJalali(createGregorianDate(2023, 9)), "jMMMM jYYYY")} - ${formatJalali(toJalali(createGregorianDate(2024, 8)), "jMMMM jYYYY")}`}>
+          <p className="m-2 text-gray-800"><span className="font-bold">{lang === "fa" ? "سه ماه کارآموزی:" : "3-month Internship:"}</span> {t('workExp1')}</p>
+          <p className="m-2 text-gray-800"><span className="font-bold">{lang === "fa" ? "نه ماه فعالیت حرفه‌ای:" : "9-month Front-End Developer Role:"}</span> {t('workExp2')}</p>
+        </ExpCard>
         <EducationCard lang={lang} />
       </main>
       <footer className="flex flex-wrap gap-8 md:gap-16 md:px-16 p-8 shadow-[0px_-5px_15px_5px_rgba(0,0,0,0.05)] dark:shadow-gray-600/50">

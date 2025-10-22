@@ -1,6 +1,6 @@
 export const educations = [
     {
-        logo: "Sampad.png",
+        logo: "Sampad.svg",
         fa: {
 
         },
@@ -9,7 +9,7 @@ export const educations = [
         }
     },
     {
-        logo: "AUT.png",
+        logo: "AUT.svg",
         fa: {
 
         },
@@ -18,7 +18,7 @@ export const educations = [
         }
     },
     {
-        logo: "KNTU.png",
+        logo: "KNTU.svg",
         fa: {
 
         },
