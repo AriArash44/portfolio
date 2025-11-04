@@ -19,6 +19,7 @@ export const desktopImages: CarouselImage[] = [
     { src: `${baseURL}images/frontendmentor/14.png`, alt: 'contact form', altfa: "فرم تماس" },
     { src: `${baseURL}images/frontendmentor/15.png`, alt: 'news homepage', altfa: "صفحه اصلی اخبار" },
     { src: `${baseURL}images/frontendmentor/16.png`, alt: 'E-C product page', altfa: "صفحه خرید اینترنتی" },
+    { src: `${baseURL}images/frontendmentor/17.png`, alt: 'nft card component', altfa: "کامپوننت کارت nft" },
 ];
 
 export const mobileImages: CarouselImage[] = [
@@ -38,4 +39,5 @@ export const mobileImages: CarouselImage[] = [
     { src: `${baseURL}images/frontendmentor/mobile/14.png`, alt: 'contact form', altfa: "فرم تماس" },
     { src: `${baseURL}images/frontendmentor/mobile/15.png`, alt: 'news homepage', altfa: "صفحه اصلی اخبار" },
     { src: `${baseURL}images/frontendmentor/mobile/16.png`, alt: 'E-C product page', altfa: "صفحه خرید اینترنتی" },
+    { src: `${baseURL}images/frontendmentor/mobile/17.png`, alt: 'nft card component', altfa: "کامپوننت کارت nft" },
 ];
