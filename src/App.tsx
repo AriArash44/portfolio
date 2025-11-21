@@ -97,8 +97,7 @@ export default function App() {
       </header>
       <main className="p-12 mx-[5%] ">
         <h2 className="text-center text-custom-gray" style={{fontFamily: lang === 'fa' ? 'amiri' : 'caveat'}}>"{t("bio")}"</h2>
-        <a href={lang === "fa" ? "http://drive.google.com/uc?export=download&id=1k6oIpGRI18_BLHylTr4QLcgOd1PBW4a4" : 
-          "https://drive.google.com/uc?export=download&id=1hpnXTm_RBYUH497AbACkvid1Svj7hus2"}
+        <a href="https://drive.google.com/file/d/1PyKS1FOXQid3UruXNVkp4uTN9Y0DNeyT/view?usp=sharing"
           className="block text-center mt-3 underline text-custom-gold hover:text-custom-dark-gold
           sm:text-xl dark:hover:text-custom-light-gold">
           {lang === "fa" ? "دانلود رزومه من" : "Download My Resume"}
@@ -132,10 +131,15 @@ export default function App() {
         </a>
         <h3 className="mt-10 mb-3 text-custom-second-dark-gray dark:text-custom-second-light-gray font-bold">{t('workTitle')}</h3>
         <ExpCard logo={`${import.meta.env.BASE_URL}logos/ScalesOps.svg`} title={lang === "fa" ? "شرکت ScalesOps" : "ScalesOps office"} 
-        date={lang === "en" ? `${formatGregorian(createGregorianDate(2023, 8), "MMMM YYYY")} - ${formatGregorian(createGregorianDate(2024, 7), "MMMM YYYY")}` : 
-        `${formatJalali(toJalali(createGregorianDate(2023, 9)), "jMMMM jYYYY")} - ${formatJalali(toJalali(createGregorianDate(2024, 8)), "jMMMM jYYYY")}`}>
-          <p className="m-2 text-gray-800"><span className="font-bold">{lang === "fa" ? "سه ماه کارآموزی:" : "3-month Internship:"}</span> {t('workExp1')}</p>
+        date={lang === "en" ? `${formatGregorian(createGregorianDate(2023, 10), "MMMM YYYY")} - ${formatGregorian(createGregorianDate(2024, 8), "MMMM YYYY")}` : 
+        `${formatJalali(toJalali(createGregorianDate(2023, 10)), "jMMMM jYYYY")} - ${formatJalali(toJalali(createGregorianDate(2024, 8)), "jMMMM jYYYY")}`}>
+          <p className="m-2 text-gray-800"><span className="font-bold">{lang === "fa" ? "دو ماه کارآموزی:" : "2-month Internship:"}</span> {t('workExp1')}</p>
           <p className="m-2 text-gray-800"><span className="font-bold">{lang === "fa" ? "نه ماه فعالیت حرفه‌ای:" : "9-month Front-End Developer Role:"}</span> {t('workExp2')}</p>
+        </ExpCard>
+        <ExpCard logo={`${import.meta.env.BASE_URL}logos/Roshan.webp`} title={lang === "fa" ? "شرکت روشن" : "Roshan office"} imgClassName="p-1.5"
+        date={lang === "en" ? `${formatGregorian(createGregorianDate(2025, 7), "MMMM YYYY")} - ${formatGregorian(createGregorianDate(2025, 8), "MMMM YYYY")}` : 
+        `${formatJalali(toJalali(createGregorianDate(2025, 7)), "jMMMM jYYYY")} - ${formatJalali(toJalali(createGregorianDate(2025, 8)), "jMMMM jYYYY")}`}>
+          <p className="m-2 text-gray-800"><span className="font-bold">{lang === "fa" ? "دو ماه کارآموزی:" : "2-month Internship:"}</span> {t('workExp3')}</p>
         </ExpCard>
         <h3 className="mt-8 mb-3 text-custom-second-dark-gray dark:text-custom-second-light-gray font-bold">{t('educTitle')}</h3>
         <EducationCard lang={lang} />

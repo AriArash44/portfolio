@@ -8,7 +8,7 @@ const persianMonths: { [key: string]: string } = {
     'Amordaad': 'مرداد',
     'Shahrivar': 'شهریور',
     'Mehr': 'مهر',
-    'Aban': 'آبان',
+    'Aabaan': 'آبان',
     'Azar': 'آذر',
     'Dey': 'دی',
     'Bahman': 'بهمن',

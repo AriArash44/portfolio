@@ -1,6 +1,6 @@
 {
   "name": "Arash Asghari",
-  "bio": "Passionate developer with a primary focus on front-end development and one year of industrial work experience. Also interested in back-end and AI fields, with completed projects in these areas. I hold a Bachelor's degree in Computer Engineering and have educational exemption until September 2028 for my online Master's program, which won't interfere with full-time availability. Continuous learning and tackling new challenges have always been integral to my professional journey.",
+  "bio": "An enthusiastic programmer with a primary focus on frontend development and one year of industrial experience. I am passionate about crafting clean, intuitive user interfaces and enhancing user experience. A Computer Engineering graduate, I am seeking a full-time position in Tehran. I am passionate about continuous learning and eager to take on new challenges.",
   "toolTitle": "Tools I work with as front-end developer:",
   "htmlE": "Crafting the structural backbone of every web page.",
   "cssE": "Transforming designs into visual experiences.",
@@ -17,5 +17,6 @@
   "workTitle": "Work experiennce:",
   "workExp1": "Completed intensive training, mastering Svelte and React frameworks through practical project building.",
   "workExp2": "Responsible for translating UI/UX designs from the design team into functional and responsive web applications. Contributed to outsourced projects for major clients including Digikala, Charisma Insurance, and Shima Shoes Store.",
+  "workExp3": "Redeveloped a company project named Ava in an experimental capacity, which selected among the best internship project there.",
   "educTitle": "Education experience:"
 }
