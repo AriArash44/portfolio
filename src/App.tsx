@@ -136,7 +136,7 @@ export default function App() {
           <p className="m-2 text-gray-800"><span className="font-bold">{lang === "fa" ? "دو ماه کارآموزی:" : "2-month Internship:"}</span> {t('workExp1')}</p>
           <p className="m-2 text-gray-800"><span className="font-bold">{lang === "fa" ? "نه ماه فعالیت حرفه‌ای:" : "9-month Front-End Developer Role:"}</span> {t('workExp2')}</p>
         </ExpCard>
-        <ExpCard logo={`${import.meta.env.BASE_URL}logos/Roshan.webp`} title={lang === "fa" ? "شرکت روشن" : "Roshan office"} imgClassName="p-1.5"
+        <ExpCard logo={`${import.meta.env.BASE_URL}logos/SystemGroup.png`} title={lang === "fa" ? "شرکت همکاران سیستم" : "System Group office"} imgClassName="p-1.5"
         date={lang === "en" ? `${formatGregorian(createGregorianDate(2025, 7), "MMMM YYYY")} - ${formatGregorian(createGregorianDate(2025, 8), "MMMM YYYY")}` : 
         `${formatJalali(toJalali(createGregorianDate(2025, 7)), "jMMMM jYYYY")} - ${formatJalali(toJalali(createGregorianDate(2025, 8)), "jMMMM jYYYY")}`}>
           <p className="m-2 text-gray-800"><span className="font-bold">{lang === "fa" ? "دو ماه کارآموزی:" : "2-month Internship:"}</span> {t('workExp3')}</p>
