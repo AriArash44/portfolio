@@ -97,7 +97,7 @@ export default function App() {
       </header>
       <main className="p-12 mx-[5%] ">
         <h2 className="text-center text-custom-gray" style={{fontFamily: lang === 'fa' ? 'amiri' : 'caveat'}}>"{t("bio")}"</h2>
-        <a href="https://drive.google.com/file/d/1PyKS1FOXQid3UruXNVkp4uTN9Y0DNeyT/view?usp=sharing"
+        <a href="https://drive.google.com/file/d/1EBDcuWxUdSR6O-l1EHtc8w_tKVS7xLIV/view?usp=sharing"
           className="block text-center mt-3 underline text-custom-gold hover:text-custom-dark-gold
           sm:text-xl dark:hover:text-custom-light-gold">
           {lang === "fa" ? "دانلود رزومه من" : "Download My Resume"}
