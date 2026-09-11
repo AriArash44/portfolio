@@ -134,12 +134,12 @@ export default function App() {
         date={lang === "en" ? `${formatGregorian(createGregorianDate(2023, 10), "MMMM YYYY")} - ${formatGregorian(createGregorianDate(2024, 8), "MMMM YYYY")}` : 
         `${formatJalali(toJalali(createGregorianDate(2023, 10)), "jMMMM jYYYY")} - ${formatJalali(toJalali(createGregorianDate(2024, 8)), "jMMMM jYYYY")}`}>
           <p className="m-2 text-gray-800"><span className="font-bold">{lang === "fa" ? "دو ماه کارآموزی:" : "2-month Internship:"}</span> {t('workExp1')}</p>
-          <p className="m-2 text-gray-800"><span className="font-bold">{lang === "fa" ? "نه ماه فعالیت حرفه‌ای:" : "9-month Front-End Developer Role:"}</span> {t('workExp2')}</p>
+          <p className="m-2 text-gray-800"><span className="font-bold">{lang === "fa" ? "نه ماه برنامه‌نویسی فرانت‌اند:" : "9-month Front-End Developer Role:"}</span> {t('workExp2')}</p>
         </ExpCard>
         <ExpCard logo={`${import.meta.env.BASE_URL}logos/SystemGroup.png`} title={lang === "fa" ? "شرکت همکاران سیستم" : "System Group office"} imgClassName="p-1.5"
         date={lang === "en" ? `${formatGregorian(createGregorianDate(2025, 12), "MMMM YYYY")} - present` : 
         `${formatJalali(toJalali(createGregorianDate(2025, 12)), "jMMMM jYYYY")} - اکنون`}>
-          <p className="m-2 text-gray-800"><span className="font-bold">{lang === "fa" ? "۱۰ ماه برنامه‌نویسی وب:" : "10-month web development:"}</span>{" "}{t('workExp3')}</p>
+          <p className="m-2 text-gray-800"><span className="font-bold">{lang === "fa" ? "ده ماه برنامه‌نویسی وب:" : "10-month web development:"}</span>{" "}{t('workExp3')}</p>
         </ExpCard>
         <h3 className="mt-8 mb-3 text-custom-second-dark-gray dark:text-custom-second-light-gray font-bold">{t('educTitle')}</h3>
         <EducationCard lang={lang} />

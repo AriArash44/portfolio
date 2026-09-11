@@ -6,42 +6,34 @@ const lang = i18n.language;
 
 export const getToolsData = (t: TFunction) => [
     {
-        icon: `${baseUrl}icons/html.svg`,
-        alt: "HTML5",
-        title: "HTML",
-        description: t("htmlE"),
+        icon: `${baseUrl}icons/html_css.svg`,
+        alt: "HTML & CSS",
+        title: "HTML/CSS",
+        description: t("htmlCssE"),
         delay: "0",
         imgPadding: "0"
     },
     {
-        icon: `${baseUrl}icons/css.svg`,
-        alt: "CSS3",
-        title: "CSS",
-        description: t("cssE"),
+        icon: `${baseUrl}icons/js_ts.svg`,
+        alt: "JavaScript & TypeScript",
+        title: "JS/TS",
+        description: t("jsTsE"),
         delay: "100",
         imgPadding: "0"
-    },
-    {
-        icon: `${baseUrl}icons/javascript.svg`,
-        alt: "JavaScript",
-        title: "JavaScript",
-        description: t("jsE"),
-        delay: "200",
-        imgPadding: "10"
-    },
-    {
-        icon: `${baseUrl}icons/typescript.svg`,
-        alt: "TypeScript",
-        title: "TypeScript",
-        description: t("typescriptE"),
-        delay: "200",
-        imgPadding: "10"
     },
     {
         icon: `${baseUrl}icons/react.svg`,
         alt: "React",
         title: "React",
         description: t("reactE"),
+        delay: "200",
+        imgPadding: "10"
+    },
+    {
+        icon: `${baseUrl}icons/angular.svg`,
+        alt: "Angular",
+        title: "Angular",
+        description: t("angularE"),
         delay: "200",
         imgPadding: "10"
     },
@@ -54,11 +46,35 @@ export const getToolsData = (t: TFunction) => [
         imgPadding: "10"
     },
     {
-        icon: `${baseUrl}icons/sass.svg`,
-        alt: "Sass",
-        title: "Sass",
-        description: t("sassE"),
-        delay: "200",
+        icon: `${baseUrl}icons/golang.svg`,
+        alt: "Golang",
+        title: "Golang",
+        description: t("golangE"),
+        delay: "300",
+        imgPadding: "10"
+    },
+    {
+        icon: `${baseUrl}icons/gin.svg`,
+        alt: "Gin Framework",
+        title: "Gin",
+        description: t("ginE"),
+        delay: "300",
+        imgPadding: "10"
+    },
+    {
+        icon: `${baseUrl}icons/postgresql.svg`,
+        alt: "PostgreSQL",
+        title: "PostgreSQL",
+        description: t("postgresE"),
+        delay: "300",
+        imgPadding: "10"
+    },
+    {
+        icon: `${baseUrl}icons/grpc.svg`,
+        alt: "gRPC",
+        title: "gRPC",
+        description: t("grpcE"),
+        delay: "400",
         imgPadding: "10"
     },
     {
@@ -66,7 +82,15 @@ export const getToolsData = (t: TFunction) => [
         alt: "Git",
         title: "Git",
         description: t("gitE"),
-        delay: "200",
+        delay: "400",
+        imgPadding: "10"
+    },
+    {
+        icon: `${baseUrl}icons/docker.svg`,
+        alt: "Docker",
+        title: "Docker",
+        description: t("dockerE"),
+        delay: "400",
         imgPadding: "10"
     },
     {
