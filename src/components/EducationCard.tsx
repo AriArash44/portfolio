@@ -55,8 +55,8 @@ const educations = [
             start: "2025 9",
             end: "2027 8",
             descipline: "هوش مصنوعی",
-            score: "؟؟؟",
-            explanation: "به صورت الکترونیکی، بدون نداخل با کار تمام‌وقت"
+            score: "16.14",
+            explanation: "به صورت الکترونیکی، بدون تداخل با کار تمام‌وقت"
         },
         en: {
             title: "Khaje Nasir university",
@@ -64,7 +64,7 @@ const educations = [
             start: "2025 9",
             end: "2027 8",
             descipline: "Artificial intelligence",
-            score: "TBD",
+            score: "16.14",
             explanation: "Online courses, without interference with full-time work"
         }
     }
